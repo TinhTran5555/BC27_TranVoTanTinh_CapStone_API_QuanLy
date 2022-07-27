@@ -5,11 +5,11 @@ function main() {
   // B1: Gọi API lấy danh sách sản phẩm
   apiGetProducts().then(function (result) {
     // Tạo biến products nhận kết quả trả về từ API
-    let products = result.data;
+    var products = result.data;
     // Sau khi đã lấy được data từ API thành công
     // Duyệt mảng data và khởi tạo các đối tượng Product
     for (let i = 0; i < products.length; i++) {
-      let product = products[i];
+      var product = products[i];
       products[i] = new Product(
         product.id,
         product.name,
@@ -28,9 +28,9 @@ function main() {
 }
 
 function display(products) {
-  let html = "";
-  for (let i = 0; i < products.length; i++) {
-    let product = products[i];
+  var html = "";
+  for (var i = 0; i < products.length; i++) {
+    var product = products[i];
     html += `
       <tr>
         <td>${i + 1}</td>
@@ -72,26 +72,26 @@ function display(products) {
 // Hàm xử lý gọi API thêm sản phẩm
 function addProduct() {
   // B1: DOM lấy value
-  let id = document.getElementById("id").value;
-  let name = document.getElementById("name").value;
-  let price = document.getElementById("price").value;
-  let screen = document.getElementById("screen").value;
-  let backCamera = document.getElementById("backCamera").value;
-  let frontCamera = document.getElementById("frontCamera").value;
-  let img = document.getElementById("image").value;
-  let desc = document.getElementById("description").value;
-  let type = document.getElementById("type").value;
+  var id = document.getElementById("id").value;
+  var name = document.getElementById("name").value;
+  var price = document.getElementById("price").value;
+  var screen = document.getElementById("screen").value;
+  var backCamera = document.getElementById("backCamera").value;
+  var frontCamera = document.getElementById("frontCamera").value;
+  var img = document.getElementById("image").value;
+  var desc = document.getElementById("description").value;
+  var type = document.getElementById("type").value;
 
 
 
   // Tạo validation
-  let isVali = validation();
+  var isVali = validation();
 
   if (!isVali) {
     return;
   }
   // B2: Khởi tạo đối tượng Product
-  let product = new Product(id, name, price, screen, backCamera, frontCamera, img, desc, type);
+  var product = new Product(id, name, price, screen, backCamera, frontCamera, img, desc, type);
   // B3: Gọi API thêm sản phẩm
 
   apiAddProduct(product)
@@ -119,25 +119,25 @@ function deleteProduct(productId) {
 // Hàm xử lý gọi API cập nhật sản phẩm
 function updateProduct() {
   // B1: DOM lấy value
-  let id = document.getElementById("id").value;
-  let name = document.getElementById("name").value;
-  let price = document.getElementById("price").value;
-  let screen = document.getElementById("screen").value;
-  let backCamera = document.getElementById("backCamera").value;
-  let frontCamera = document.getElementById("frontCamera").value;
-  let img = document.getElementById("image").value;
-  let desc = document.getElementById("description").value;
-  let type = document.getElementById("type").value;
+  var id = document.getElementById("id").value;
+  var name = document.getElementById("name").value;
+  var price = document.getElementById("price").value;
+  var screen = document.getElementById("screen").value;
+  var backCamera = document.getElementById("backCamera").value;
+  var frontCamera = document.getElementById("frontCamera").value;
+  var img = document.getElementById("image").value;
+  var desc = document.getElementById("description").value;
+  var type = document.getElementById("type").value;
 
   // Tạo validation
-  let isVali = validation();
+  var isVali = validation();
 
   if (!isVali) {
     return;
   }
 
   // B2: Khởi tạo đối tượng Product
-  let product = new Product(id, name, price, screen, backCamera, frontCamera, img, desc, type);
+  var product = new Product(id, name, price, screen, backCamera, frontCamera, img, desc, type);
 
   // B3: Gọi API cập nhật sản phẩm
   apiUpdateProduct(product)
@@ -147,7 +147,7 @@ function updateProduct() {
       resetForm();
     })
     .catch(function (error) {
-    
+    console.log(error);
 
     });
 }
@@ -206,7 +206,7 @@ function showAddModal() {
 document.querySelector(".modal-footer").addEventListener("click", handleSubmit);
 // Các hàm callback được gọi tới khi event được kích hoạt đồng thời nhận được 1 tham số là đối tượng Event
 function handleSubmit(event) {
-  let type = event.target.getAttribute("data-type");
+  var type = event.target.getAttribute("data-type");
 
   switch (type) {
     case "add":
@@ -227,9 +227,9 @@ document
 
 function handleProductAction(event) {
   // Loại button (delete || update)
-  let type = event.target.getAttribute("data-type");
+  var type = event.target.getAttribute("data-type");
   // Id của sản phẩm
-  let id = event.target.getAttribute("data-id");
+  var id = event.target.getAttribute("data-id");
 
   switch (type) {
     case "delete":
@@ -293,14 +293,14 @@ function handleSearch(evt) {
   if (evt.key !== "Enter") return;
 
   // Nếu key click vào là Enter thì bắt đầu lấy value của input và get products
-  let value = evt.target.value;
+  var value = evt.target.value;
   apiGetProducts(value).then(function (result) {
     // Tạo biến products nhận kết quả trả về từ API
-    let products = result.data;
+    var products = result.data;
     // Sau khi đã lấy được data từ API thành công
     // Duyệt mảng data và khởi tạo các đối tượng Product
-    for (let i = 0; i < products.length; i++) {
-      let product = products[i];
+    for (var i = 0; i < products.length; i++) {
+      var product = products[i];
       products[i] = new Product(
         product.id,
         product.name,
@@ -323,14 +323,14 @@ function handleSearchButton() {
 
 
   // DOM tới input lấy giá trị để tìm kiếm
-  let value = document.getElementById("txtSearch").value;
+  var value = document.getElementById("txtSearch").value;
   apiGetProducts(value).then(function (result) {
     // Tạo biến products nhận kết quả trả về từ API
-    let products = result.data;
+    var products = result.data;
     // Sau khi đã lấy được data từ API thành công
     // Duyệt mảng data và khởi tạo các đối tượng Product
-    for (let i = 0; i < products.length; i++) {
-      let product = products[i];
+    for (var i = 0; i < products.length; i++) {
+      var product = products[i];
       products[i] = new Product(
         product.id,
         product.name,
@@ -350,18 +350,18 @@ function handleSearchButton() {
 // Hàm kiểm khi thêm và cập nhật nhân viên
 function validation() {
   // Dom tới các input và lấy giá trị
-  let name = document.getElementById("name").value;
-  let price = document.getElementById("price").value;
-  let screen = document.getElementById("screen").value;
-  let backCamera = document.getElementById("backCamera").value;
-  let frontCamera = document.getElementById("frontCamera").value;
-  let img = document.getElementById("image").value;
-  let desc = document.getElementById("description").value;
-  let type = document.getElementById("type").value;
+  var name = document.getElementById("name").value;
+  var price = document.getElementById("price").value;
+  var screen = document.getElementById("screen").value;
+  var backCamera = document.getElementById("backCamera").value;
+  var frontCamera = document.getElementById("frontCamera").value;
+  var img = document.getElementById("image").value;
+  var desc = document.getElementById("description").value;
+  var type = document.getElementById("type").value;
   // Tạo biến cờ hiệu
-  let isValid = true;
+  var isValid = true;
   // Kiểm tra tên
-  let namePattern = new RegExp("^[a-zA-Z0-9 ]+$");
+  var namePattern = new RegExp("^[a-zA-Z0-9 ]+$");
   if (!isRequired(name)) {
    
     isValid = false;
@@ -376,7 +376,7 @@ function validation() {
       "Tên điện thoại không đúng định dạng";
   }
   // Kiểm tra giá sản phẩm
-  let pricePattern = new RegExp("^[0-9$]+$");
+  var pricePattern = new RegExp("^[0-9$]+$");
   if (!isRequired(price)) {
     isValid = false;
     document.getElementById("tbPrice").style.display = "block";
@@ -390,7 +390,7 @@ function validation() {
       "Thông tin giá sản phẩm không đúng định dạng";
   }
   // Kiểm tra màn hình
-  let screenPattern = new RegExp("^[a-zA-Z0-9 ]+$");
+  var screenPattern = new RegExp("^[a-zA-Z0-9 ]+$");
   if (!isRequired(screen)) {
    
     isValid = false;
@@ -405,7 +405,7 @@ function validation() {
       "Thông tin màn hình không đúng định dạng";
   }
   // Kiểm tra cam sau
-  let cameraPattern = new RegExp("^[a-zA-Z0-9:&,-_ àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ]+$");
+  var cameraPattern = new RegExp("^[a-zA-Z0-9:&,-_ àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ]+$");
   if (!isRequired(backCamera)) {
     
     isValid = false;
@@ -446,7 +446,7 @@ function validation() {
     document.getElementById("tbType").innerHTML = "Vui lòng chọn loại sản phẩm";
   }
   // Kiểm tra mô tả
-  let descPattern = new RegExp("^[0-9a-zA-Z àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ,.%-]{1,300}$");
+  var descPattern = new RegExp("^[0-9a-zA-Z àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ,.%-]{1,300}$");
   if (!isRequired(desc)) {
    
     isValid = false;
